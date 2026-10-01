@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Diego González - ERP Implementation & BI Expert. 17 years managing $15M+ CAPEX portfolios, enterprise Oracle/SAP transformations, and financial intelligence platforms across media, energy, retail, and mining sectors. Based in Perth, WA.">
+    <meta name="keywords" content="ERP, Oracle Cloud, SAP, Looker, Power BI, BI Implementation, CAPEX Control, Management Control, Financial Systems">
+    <meta property="og:title" content="Diego González - ERP & BI Expert | Digital Transformation Leader">
+    <meta property="og:description" content="17 years building enterprise ERP systems and BI platforms. $15M+ CAPEX controlled. 300+ projects managed. Oracle Cloud, SAP, Looker, Power BI expert.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://diegosgonzalez.dev">
+    <title>Diego González — ERP & BI Expert | Digital Transformation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0f0f0f;
+                color: #e5e5e5;
+            }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 30px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            header {
+                border-bottom-color: #333;
+            }
+        }
+        
+        nav {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        nav a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #1a1a1a;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            nav a {
+                color: #999;
+            }
+            nav a:hover {
+                color: #e5e5e5;
+            }
+        }
+        
+        h1 {
+            font-size: 36px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            color: #666;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .tagline {
+                color: #999;
+            }
+        }
+        
+        .contact-info {
+            font-size: 14px;
+            color: #666;
+            margin-top: 12px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .contact-info {
+                color: #999;
+            }
+        }
+        
+        .contact-info a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        section {
+            margin-bottom: 50px;
+        }
+        
+        section > h2 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 12px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            section > h2 {
+                border-bottom-color: #333;
+            }
+        }
+        
+        .summary {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .summary {
+                color: #d0d0d0;
+            }
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .metric {
+                background: #1a1a1a;
+            }
+        }
+        
+        .metric-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 8px;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .metric-label {
+                color: #999;
+            }
+        }
+        
+        .project-card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .project-card {
+                background: #1a1a1a;
+                border-color: #333;
+            }
+        }
+        
+        .project-card:hover {
+            border-color: #0066cc;
+            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.1);
+        }
+        
+        .project-header {
+            display: flex;
+            align-items: start;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .project-icon {
+            font-size: 28px;
+            min-width: 32px;
+        }
+        
+        .project-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 4px;
+        }
+        
+        .project-category {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .project-category {
+                color: #999;
+            }
+        }
+        
+        .project-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 12px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .project-description {
+                color: #aaa;
+            }
+        }
+        
+        .tech-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+        
+        .tech-tag {
+            background: #e8f0ff;
+            color: #0066cc;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .tech-tag {
+                background: #1a3a5c;
+                color: #5fa3ff;
+            }
+        }
+        
+        .recognition {
+            background: #f5f5f5;
+            border-left: 4px solid #0066cc;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .recognition {
+                background: #1a1a1a;
+                border-left-color: #5fa3ff;
+            }
+        }
+        
+        .recognition-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .recognition-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .recognition-desc {
+                color: #999;
+            }
+        }
+        
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-category {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 8px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .skill-category {
+                background: #1a1a1a;
+            }
+        }
+        
+        .skill-category h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #0066cc;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: #555;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .skill-list li {
+                color: #aaa;
+            }
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #e0e0e0;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .timeline::before {
+                background: #333;
+            }
+        }
+        
+        .timeline-item {
+            margin-bottom: 24px;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #0066cc;
+            border: 2px solid white;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .timeline-item::before {
+                border-color: #0f0f0f;
+            }
+        }
+        
+        .timeline-date {
+            font-size: 13px;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .timeline-date {
+                color: #999;
+            }
+        }
+        
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 4px 0;
+        }
+        
+        .timeline-company {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .timeline-company {
+                color: #999;
+            }
+        }
+        
+        .timeline-desc {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .timeline-desc {
+                color: #aaa;
+            }
+        }
+        
+        footer {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 30px;
+            margin-top: 60px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            footer {
+                border-top-color: #333;
+                color: #999;
+            }
+        }
+        
+        footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <h1>Diego González Carrasco</h1>
+            <p class="tagline">ERP Implementation & BI Expert | Capital Projects | Digital Transformation</p>
+            <p class="contact-info">
+                Perth, Western Australia | +61 431 139 167 | 
+                <a href="mailto:gonzalezcarrasco.diegosebastian@gmail.com">Email</a> | 
+                <a href="https://linkedin.com/in/diegosgonzalezc">LinkedIn</a>
+            </p>
+        </header>
+
+        <section>
+            <p class="summary">
+                <strong>17 years</strong> building enterprise ERP systems and financial intelligence platforms for organizations managing $15M+ CAPEX portfolios. Proven track record implementing Oracle Cloud and SAP Business One transformations, architecting real-time BI platforms (Looker, QlikSense, Power BI), designing Oracle database analytics solutions with SQL TOAD and PL/SQL, and directing 50+ person finance teams. Deep expertise in CAPEX cost control, budget design, variance analysis, and management reporting across media, energy, retail, and resources sectors. 
+            </p>
+            
+            <p class="summary">
+                Now based in Perth and pursuing employer-sponsored visa opportunities with Standard Business Sponsors. ACS Skills Assessment under ANZSCO 261111 (ICT Business Analyst). Actively upskilling in AI and digital transformation (Anthropic Claude, Pipedrive, Klaviyo certifications).
+            </p>
+            
+            <div class="metrics-grid">
+                <div class="metric">
+                    <div class="metric-value">17</div>
+                    <div class="metric-label">Years ERP & BI</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">$15M+</div>
+                    <div class="metric-label">CAPEX Controlled</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">300+</div>
+                    <div class="metric-label">Projects Managed</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">50+</div>
+                    <div class="metric-label">Teams Led</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">4</div>
+                    <div class="metric-label">ERP Platforms</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">4</div>
+                    <div class="metric-label">BI Platforms</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2>Portfolio & Case Studies</h2>
+            
+            <a href="#" class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">☀️</div>
+                    <div>
+                        <div class="project-category">CAPEX Management & BI</div>
+                        <div class="project-title">Flux Solar: $15M CAPEX Portfolio Control</div>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Controlled 300+ concurrent solar energy projects (AUD $6K–$15M each) with zero unified cost tracking. Implemented SAP Business One project module with WBS-based cost control + Google Looker real-time dashboards. Delivered to executive stakeholders in <strong>2.6% variance achievement</strong> and standardized cost tracking across all business units.
+                </p>
+                <div class="tech-tags">
+                    <span class="tech-tag">SAP Business One</span>
+                    <span class="tech-tag">Google Looker</span>
+                    <span class="tech-tag">WBS Cost Control</span>
+                    <span class="tech-tag">Project Portfolio</span>
+                </div>
+            </a>
+
+            <a href="#" class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">📺</div>
+                    <div>
+                        <div class="project-category">ERP Transformation & BI</div>
+                        <div class="project-title">Canal 13: Oracle ERP Re-implementation for $50M Media Group</div>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Re-implemented Oracle Cloud ERP for AUD $50M+ revenue media organization. Architected enterprise financial data mart (Oracle Autonomous DB + QlikSense) replacing 500+ manual monthly reports. Reduced month-end close from 15 days to 5 days. Enabled C-suite self-service analytics with live KPI visibility. Led strategic efficiency initiatives improving EBITDA performance year-over-year.
+                </p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Oracle Cloud ERP</span>
+                    <span class="tech-tag">Oracle Autonomous DB</span>
+                    <span class="tech-tag">QlikSense</span>
+                    <span class="tech-tag">Financial Analytics</span>
+                </div>
+            </a>
+
+            <a href="#" class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🎓</div>
+                    <div>
+                        <div class="project-category">Financial Analytics & Database</div>
+                        <div class="project-title">UC Chile: Financial Analytics Platform for Finance Division</div>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Directed 50+ person finance function processing 50,000+ invoices annually. Built Oracle database analytics layer using SQL TOAD and PL/SQL, integrated Dynamics tables for real-time financial visibility across billing, collections, revenue, accounting, and management control. Implemented process automation improvements reducing monthly close timeline by 30%. Supported $32B MM in annual revenue with accurate, timely financial reporting and automated transaction processing.
+                </p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Oracle Database</span>
+                    <span class="tech-tag">SQL TOAD</span>
+                    <span class="tech-tag">PL/SQL</span>
+                    <span class="tech-tag">Dynamics Tables</span>
+                    <span class="tech-tag">Financial Analytics</span>
+                </div>
+            </a>
+
+            <a href="#" class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">💼</div>
+                    <div>
+                        <div class="project-category">Business Intelligence & Data</div>
+                        <div class="project-title">Good Food Market: KPI Dashboard & Inventory Optimization</div>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Founder & CEO of health-food retail business. Developed Google Looker Studio KPI dashboard tracking sales, inventory turns, and margin performance. Implemented integrated sales, inventory, and logistics management system. Drove financial growth through forecasting, business projections, and logistics optimization.
+                </p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Google Looker Studio</span>
+                    <span class="tech-tag">Inventory Analytics</span>
+                    <span class="tech-tag">Sales Forecasting</span>
+                </div>
+            </a>
+        </section>
+
+        <section>
+            <h2>Recognition & Achievements</h2>
+            
+            <div class="recognition">
+                <div class="recognition-title">🏆 ERP & Digital Transformation Leadership</div>
+                <div class="recognition-desc">Led end-to-end Oracle Cloud ERP re-implementation for $50M media group, improving operational efficiency and financial data integrity. Architected enterprise financial data mart (Oracle Autonomous DB + QlikSense) replacing 500+ manual monthly reports and reducing month-end close from 15 days to 5 days.</div>
+            </div>
+
+            <div class="recognition">
+                <div class="recognition-title">📊 Real-Time BI Dashboard Development</div>
+                <div class="recognition-desc">Built and deployed real-time dashboards across Qlik Sense, Google Looker, and Power BI for executive KPI tracking and data-driven decision-making. Architected Oracle database analytics layer using SQL TOAD and PL/SQL with Dynamics table integration for processing 50,000+ annual invoices with real-time visibility. Developed predictive inventory projection system enhancing broadcast strategy accuracy.</div>
+            </div>
+
+            <div class="recognition">
+                <div class="recognition-title">💰 Strategic Cost Control & Sourcing</div>
+                <div class="recognition-desc">Controlled $15M+ CAPEX portfolio across 300+ concurrent projects with 2.6% variance achievement. Established strategic sourcing partnerships ensuring quality and cost efficiency. Led vendor negotiation initiatives securing measurable cost savings and optimal IT procurement spend control.</div>
+            </div>
+
+            <div class="recognition">
+                <div class="recognition-title">🎖️ ACS Skills Assessment</div>
+                <div class="recognition-desc">ANZSCO 261111 (ICT Business Analyst) - Australian Computer Society, December 2023. Eligible for employer-sponsored visa arrangements (TSS 482 / ENS 186).</div>
+            </div>
+            
+            <div class="recognition">
+                <div class="recognition-title">📜 QlikView Developer Certification</div>
+                <div class="recognition-desc">QlikView Developer I - Qlik, December 2016. Hands-on expertise in data architecture, visualization design, and business intelligence platform implementation.</div>
+            </div>
+
+            <div class="recognition">
+                <div class="recognition-title">🤖 AI & Digital Transformation Certifications</div>
+                <div class="recognition-desc">Anthropic Academy: Claude 101, Claude Code 101, Building with the Claude API. Klaviyo Practitioner, Pipedrive CRM Administration. Actively upskilling in AI systems, automation, and modern digital tools (2025–2026).</div>
+            </div>
+
+            <div class="recognition">
+                <div class="recognition-title">🏆 Civic Tech Leadership</div>
+                <div class="recognition-desc">Founder & Builder of Fiscalia Ciudadana (formerly RadarPolítico) - Chilean political transparency platform. Demonstrates independent judgment, product thinking, and ability to deliver real-world impact at scale.</div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Expertise</h2>
+            
+            <div class="skills-section">
+                <div class="skill-category">
+                    <h3>ERP Systems</h3>
+                    <ul class="skill-list">
+                        <li><strong>Oracle Cloud ERP</strong> — Full implementations</li>
+                        <li><strong>Oracle On-Premises</strong> — Legacy migrations</li>
+                        <li><strong>SAP Business One</strong> — Project module</li>
+                        <li><strong>Financial Modules</strong> — AR, AP, GL, Consolidation</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Business Intelligence</h3>
+                    <ul class="skill-list">
+                        <li><strong>Google Looker</strong> — Dashboard design & LookML</li>
+                        <li><strong>QlikSense / QlikView</strong> — Data architecture</li>
+                        <li><strong>Data Visualization</strong> — Real-time reporting & insights</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Management Control</h3>
+                    <ul class="skill-list">
+                        <li><strong>CAPEX Cost Control</strong> — WBS-based tracking</li>
+                        <li><strong>Budget Design</strong> — Annual & rolling forecasts</li>
+                        <li><strong>Variance Analysis</strong> — Waterfall & drill-down</li>
+                        <li><strong>Project Management</strong> — PMI Standards</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Data & Databases</h3>
+                    <ul class="skill-list">
+                        <li><strong>Oracle Database</strong> — On-prem & Autonomous DB</li>
+                        <li><strong>PostgreSQL</strong> — Advanced queries & optimization</li>
+                        <li><strong>MySQL</strong> — Database design & management</li>
+                        <li><strong>Supabase</strong> — PostgreSQL cloud platform & APIs</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Career Timeline</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Jul 2024 – Present</div>
+                    <div class="timeline-title">Professional Development & Transition</div>
+                    <div class="timeline-company">Perth, Western Australia</div>
+                    <div class="timeline-desc">
+                        Relocated to Perth on student visa (Subclass 500) as a partner to pursue further position for permanent settlement under employer-sponsored visa pathways (TSS 482 / ENS 186). Completed AI and digital tools upskilling (Anthropic Claude 101, Claude Code 101, Klaviyo Practitioner, Pipedrive CRM certifications). Actively engaging with Perth's mining, resources, utilities and others sectors targeting Standard Business Sponsors aligned with ANZSCO 261111.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Jun 2023 – Jul 2024</div>
+                    <div class="timeline-title">Management Control Leader</div>
+                    <div class="timeline-company">Flux Solar, Santiago, Chile</div>
+                    <div class="timeline-desc">
+                        Controlled 300+ solar energy projects ($15M CAPEX portfolio). Implemented SAP Business One project module + Google Looker dashboards. Introduced SaaS fleet management solution for field operations. Led end-to-end cost control standardization across all business units.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Jun 2020 – Apr 2023</div>
+                    <div class="timeline-title">Assistant Manager, Planning & Management Control</div>
+                    <div class="timeline-company">Canal 13 S.A., Santiago, Chile</div>
+                    <div class="timeline-desc">
+                        Re-implemented Oracle Cloud ERP for $50M+ media group. Architected financial data mart (Oracle Autonomous DB + QlikSense). Managed corporate budget design and consolidation for all business units. Led strategic efficiency initiatives contributing to EBITDA improvement.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Jul 2019 – Jul 2022</div>
+                    <div class="timeline-title">Founder & CEO</div>
+                    <div class="timeline-company">Good Food Market, Santiago, Chile</div>
+                    <div class="timeline-desc">
+                        Founded and scaled health-food retail business. Built Google Looker Studio KPI dashboard for sales/inventory/margin tracking. Implemented integrated sales, inventory, and logistics system. Drove financial growth through forecasting and logistics optimization.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Mar 2016 – Feb 2018</div>
+                    <div class="timeline-title">Head of Administration & Finance</div>
+                    <div class="timeline-company">UC Chile Vice President of Communications, Santiago</div>
+                    <div class="timeline-desc">
+                        Directed 50+ finance team supporting $32B MM annual revenue. Built Oracle database analytics layer using SQL TOAD and PL/SQL with Dynamics table integration for real-time KPI visibility across 50,000+ annual invoices. Led ERP initiatives monitoring continuing education financials. Implemented process automation reducing reporting delays by 30%.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Jun 2010 – Jun 2015</div>
+                    <div class="timeline-title">IT Analyst → Management Analyst Engineer</div>
+                    <div class="timeline-company">Canal 13 S.A., Santiago, Chile</div>
+                    <div class="timeline-desc">
+                        Optimized ETL workflows and DataMart structures. Automated P&L report generation. Led implementation of artist contract management system. Delivered regular management reports and supported quarterly audits.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education & Professional Development</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2012</div>
+                    <div class="timeline-title">Bachelor of Information Technology</div>
+                    <div class="timeline-company">Instituto Duoc UC, Santiago, Chile</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2014</div>
+                    <div class="timeline-title">Diploma in Project Management and Administration</div>
+                    <div class="timeline-company">Pontificia Universidad Católica de Chile, Santiago</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2016</div>
+                    <div class="timeline-title">Strategic Planning Course</div>
+                    <div class="timeline-company">Capacituc UC, Santiago, Chile</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2018</div>
+                    <div class="timeline-title">Introduction to Financial Accounting</div>
+                    <div class="timeline-company">University of Pennsylvania (Online), USA</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p class="summary">
+                Open to opportunities in ERP implementation, BI architecture, management control consulting, and digital transformation projects. Seeking employer-sponsored visa sponsorship (TSS 482 / ENS 186) with accredited Standard Business Sponsors in Perth or surrounding regions.
+            </p>
+            <p class="contact-info">
+                <strong>Email:</strong> <a href="mailto:gonzalezcarrasco.diegosebastian@gmail.com">gonzalezcarrasco.diegosebastian@gmail.com</a><br>
+                <strong>Phone:</strong> +61 431 139 167<br>
+                <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/diegosgonzalezc">linkedin.com/in/diegosgonzalezc</a><br>
+                <strong>Location:</strong> Perth, Western Australia
+            </p>
+        </section>
+
+        <footer>
+            <p>
+                Built with real experience, real projects, and real impact. 
+                This portfolio showcases 17 years of hands-on expertise in ERP systems and business intelligence — 
+                not certifications or tutorials, but production work across multiple continents and industries.
+            </p>
+            <p style="margin-top: 12px;">
+                © 2026 Diego González Carrasco. All rights reserved.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

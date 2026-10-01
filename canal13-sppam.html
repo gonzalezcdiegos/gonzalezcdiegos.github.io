@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal 13 SPPAM: Interactive Case Study | Diego González</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            min-height: 100vh;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1a1a1a 0%, #2a2a1a 100%);
+                color: #e0e0e0;
+            }
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff6600 0%, #ff8c00 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+
+        header > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        header .meta {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            section {
+                background: #1a1a1a;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            }
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #ff6600;
+            padding-bottom: 0.5rem;
+            color: #ff6600;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ff6600;
+        }
+
+        /* Interactive Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #ff6600 0%, #ff8c00 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(255, 102, 0, 0.4);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: left 0.5s ease;
+        }
+
+        .metric-card:hover::before {
+            left: 100%;
+        }
+
+        .metric-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric-card .label {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            color: #ff6600;
+        }
+
+        .tab-button.active {
+            color: #ff6600;
+            border-bottom-color: #ff6600;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Charts Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .chart-container {
+                background: #2a2a2a;
+            }
+        }
+
+        /* Architecture Diagram */
+        .architecture {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .arch-box {
+            background: linear-gradient(135deg, #ff6600 0%, #ff8c00 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .arch-connector {
+            position: relative;
+            height: 40px;
+            margin: 0.5rem 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: #ff6600;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #ff6600;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 16px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background: #ff6600;
+        }
+
+        .timeline-item h4 {
+            color: #ff6600;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Expandable Section */
+        .expandable {
+            margin: 1rem 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .expandable {
+                border-color: #444;
+            }
+        }
+
+        .expandable-header {
+            background: #f5f5f5;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .expandable-header {
+                background: #2a2a2a;
+            }
+        }
+
+        .expandable-header:hover {
+            background: #ffe0b2;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .expandable-header:hover {
+                background: #333;
+            }
+        }
+
+        .expandable-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .expandable-icon.open {
+            transform: rotate(180deg);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1rem;
+        }
+
+        .expandable-content.open {
+            max-height: 500px;
+            padding: 1rem;
+        }
+
+        /* Achievement Cards */
+        .achievement {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #ff6600;
+            transition: transform 0.3s ease;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .achievement {
+                background: #2a2a2a;
+            }
+        }
+
+        .achievement:hover {
+            transform: translateX(8px);
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            margin-right: 1.5rem;
+            min-width: 40px;
+        }
+
+        .achievement-content h4 {
+            margin-bottom: 0.3rem;
+            color: #ff6600;
+        }
+
+        .achievement-content p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.8);
+            margin-top: 3rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            footer {
+                background: rgba(0,0,0,0.3);
+                color: #999;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .architecture {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                gap: 0;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Image Placeholder */
+        .image-placeholder {
+            background: linear-gradient(135deg, #ff6600 0%, #ff8c00 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 1.5rem 0;
+            font-weight: 500;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .data-table {
+                background: #1a1a1a;
+            }
+        }
+
+        .data-table thead {
+            background: #ff6600;
+            color: white;
+        }
+
+        .data-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .data-table td {
+                border-bottom-color: #444;
+            }
+        }
+
+        .data-table tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .data-table tbody tr:hover {
+                background: #2a2a2a;
+            }
+        }
+
+        .positive { color: #4caf50; font-weight: 600; }
+        .negative { color: #f44336; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📺 Canal 13 SPPAM System</h1>
+        <p class="subtitle">Programming Schedule & Content Management Platform</p>
+        <p class="meta">Interactive Case Study | Project Manager & Main Architect | 2014 - Present</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html#portfolio" class="back-link">← Back to Portfolio</a>
+
+        <!-- Executive Summary with Interactive Metrics -->
+        <section>
+            <h2>📊 Executive Summary</h2>
+            <p>Designed, architected, and managed the implementation of an enterprise-grade content scheduling and programming management system for Canal 13. The system integrates programming scheduling, contract management, and financial controls to automate workflow and eliminate revenue loss from expired content contracts.</p>
+            
+            <p style="margin-top: 1rem;"><strong>Status:</strong> Successfully deployed in 2014, still in active production with continuous enhancements across 10+ years.</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="number">80%</div>
+                    <div class="label">Under Budget</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">12 mo</div>
+                    <div class="label">On-Time Delivery</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">50%</div>
+                    <div class="label">Loss Reduction</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">10+ yrs</div>
+                    <div class="label">Production Uptime</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Budget vs Timeline Comparison -->
+        <section>
+            <h2>💰 Budget & Timeline Performance</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3>Budget Performance</h3>
+                    <div class="chart-container">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                    <p style="text-align: center; margin-top: 1rem; font-weight: 500;">
+                        <span class="positive">Actual: USD $80K</span> vs Planned: USD $400K
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Timeline Performance</h3>
+                    <div class="chart-container">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                    <p style="text-align: center; margin-top: 1rem; font-weight: 500;">
+                        <span class="positive">On-Time Delivery</span> | Zero Slippage
+                    </p>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Planned</th>
+                        <th>Actual</th>
+                        <th>Variance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Total Budget</strong></td>
+                        <td>USD $400,000</td>
+                        <td>USD $80,000</td>
+                        <td class="positive">-80% (Savings)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Project Duration</strong></td>
+                        <td>12 months</td>
+                        <td>12 months</td>
+                        <td class="positive">On Schedule</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Loss Reduction Goal</strong></td>
+                        <td>50% of MM$300</td>
+                        <td>50% achieved</td>
+                        <td class="positive">Goal Met</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Production Uptime</strong></td>
+                        <td>Target: 99.5%</td>
+                        <td>Actual: 99.99%</td>
+                        <td class="positive">Exceeded</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Problem & Solution Tabs -->
+        <section>
+            <h2>🎯 Problem & Solution</h2>
+            
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab(event, 'problem')">The Problem</button>
+                <button class="tab-button" onclick="switchTab(event, 'solution')">Our Solution</button>
+                <button class="tab-button" onclick="switchTab(event, 'impact')">Business Impact</button>
+            </div>
+
+            <div id="problem" class="tab-content active">
+                <h3>The Business Challenge</h3>
+                <div class="image-placeholder">💼 Canal 13 Financial Leak: MM$300 Annual Loss</div>
+                <p>Canal 13's Finance division identified a significant revenue leak: <strong>MM$300 annually lost</strong> due to expired content contracts (packaged material from external sources like films, series, and international programs) being inadvertently displayed after their licensing agreements expired.</p>
+                <p style="margin-top: 1rem;"><strong>Root Cause:</strong> Manual, disconnected processes across programming schedules, contract management, and accounting systems. No integrated visibility into contract expiry dates vs. actual air dates.</p>
+                
+                <h3 style="margin-top: 2rem;">Key Pain Points</h3>
+                <div class="achievement">
+                    <div class="achievement-icon">❌</div>
+                    <div class="achievement-content">
+                        <h4>Manual Schedule vs Contract Reconciliation</h4>
+                        <p>Programming team scheduled content, finance tracked separately. Misalignment common.</p>
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-icon">❌</div>
+                    <div class="achievement-content">
+                        <h4>No Real-Time Validation</h4>
+                        <p>Expired content discovered AFTER broadcast, resulting in expense disputes and accrual errors.</p>
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-icon">❌</div>
+                    <div class="achievement-content">
+                        <h4>Manual Reconciliation Overhead</h4>
+                        <p>Finance team spent 40+ hours monthly reconciling programming vs contracts vs GL.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="solution" class="tab-content">
+                <h3>Integrated System Architecture</h3>
+                <div class="image-placeholder">🏗️ Three-Tier Enterprise Integration Platform</div>
+                
+                <div class="architecture">
+                    <div class="arch-box">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📅</div>
+                        <strong>Programming Module</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Multi-channel scheduler with real-time contract validation</p>
+                    </div>
+                    <div class="arch-box">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📦</div>
+                        <strong>Content Registry</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Oracle DB with contract metadata & inventory</p>
+                    </div>
+                    <div class="arch-box">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💰</div>
+                        <strong>Financial Module</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Oracle ERP integration & GL reconciliation</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Key Solution Components</h3>
+                <div class="achievement">
+                    <div class="achievement-icon">✅</div>
+                    <div class="achievement-content">
+                        <h4>Real-Time Contract Validation Engine</h4>
+                        <p>System prevents scheduling expired content. Business rules block violations before they occur.</p>
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-icon">✅</div>
+                    <div class="achievement-content">
+                        <h4>Automated GL Reconciliation</h4>
+                        <p>Content exhibited → automatic expense recognition in Oracle ERP. Nightly reconciliation eliminates manual work.</p>
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-icon">✅</div>
+                    <div class="achievement-content">
+                        <h4>Inventory Projection & Analytics</h4>
+                        <p>QlikSense BI layer provides visibility into content availability 6-12 months forward. Enables strategic planning.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="impact" class="tab-content">
+                <h3>Measurable Business Impact</h3>
+                <div class="image-placeholder">📈 Revenue Recovery: MM$150+ Annually</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h4 style="color: #ff6600; margin-bottom: 1rem;">Financial Impact</h4>
+                        <div class="chart-container">
+                            <canvas id="impactChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="color: #ff6600; margin-bottom: 1rem;">Efficiency Gains</h4>
+                        <div class="achievement">
+                            <div class="achievement-icon">⏱️</div>
+                            <div class="achievement-content">
+                                <h4>80% Reduction in Manual Work</h4>
+                                <p>Finance team reconciliation: 40 hrs/mo → 8 hrs/mo</p>
+                            </div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-icon">✔️</div>
+                            <div class="achievement-content">
+                                <h4>100% Compliance Accuracy</h4>
+                                <p>Zero expired-content violations post-implementation</p>
+                            </div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-icon">📊</div>
+                            <div class="achievement-content">
+                                <h4>Real-Time Visibility</h4>
+                                <p>Executive dashboard tracks contract utilization daily</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack Section -->
+        <section>
+            <h2>🔧 Technology Stack & Architecture</h2>
+
+            <h3>Platform Components</h3>
+            <div class="image-placeholder">
+                Oracle Database | C++ Web Framework | Oracle ERP | QlikSense BI
+            </div>
+
+            <h3 style="margin-top: 2rem;">System Modules</h3>
+            
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>📅 Multi-Channel Scheduling Engine</span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Technology:</strong> C++ web application with real-time validation</p>
+                    <p style="margin-top: 0.5rem;"><strong>Capabilities:</strong></p>
+                    <ul style="margin: 1rem 0 0 1.5rem;">
+                        <li>Drag-and-drop schedule builder for all TV channels</li>
+                        <li>Real-time contract validity checks (sub-second response)</li>
+                        <li>Complex rule engine (blackout dates, syndication restrictions, channel exclusivity)</li>
+                        <li>Multi-year forward planning with contract availability forecasts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>📦 Content Registry & Inventory</span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Technology:</strong> Oracle Database with metadata engine</p>
+                    <p style="margin-top: 0.5rem;"><strong>Capabilities:</strong></p>
+                    <ul style="margin: 1rem 0 0 1.5rem;">
+                        <li>Centralized repository for 10,000+ packaged materials</li>
+                        <li>External classification (IMDB) + internal rating systems</li>
+                        <li>Contract metadata: expiry dates, exhibition counts, financial terms</li>
+                        <li>Inventory projection: forecasts availability 6-12 months forward</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>💰 Financial & Accounting Module</span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Technology:</strong> Oracle ERP integration (on-prem → Cloud migration)</p>
+                    <p style="margin-top: 0.5rem;"><strong>Capabilities:</strong></p>
+                    <ul style="margin: 1rem 0 0 1.5rem;">
+                        <li>Automated expense recognition for exhibited content</li>
+                        <li>Contract-to-GL reconciliation (nightly automated batch)</li>
+                        <li>Tax compliance module (Chile requirements)</li>
+                        <li>Audit trail on all financial transactions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>📊 Business Intelligence Layer</span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Technology:</strong> QlikSense connected to cube repositories</p>
+                    <p style="margin-top: 0.5rem;"><strong>Dashboards & Analytics:</strong></p>
+                    <ul style="margin: 1rem 0 0 1.5rem;">
+                        <li>Finance Dashboard: contract utilization, variance analysis, loss recovery by channel</li>
+                        <li>Programming Dashboard: channel fill rates, contract effectiveness, audience composition</li>
+                        <li>Executive Dashboard: KPI tracking, trend analysis, forecasting</li>
+                        <li>Real-time reporting eliminated 80% manual reconciliation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>🔄 Data Migration Challenge (Largest Technical Achievement)</span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Challenge:</strong> Transfer 10+ years of historical contract and programming data</p>
+                    <p style="margin-top: 0.5rem;"><strong>Problem:</strong> Massive volume of manual, unstructured legacy data across disconnected systems</p>
+                    <p style="margin-top: 0.5rem;"><strong>Solution Implemented:</strong></p>
+                    <ul style="margin: 1rem 0 0 1.5rem;">
+                        <li>Custom ETL routines to normalize and validate source data</li>
+                        <li>Data quality checks at each transformation stage</li>
+                        <li>Parallel run: old and new systems side-by-side during cutover</li>
+                        <li>Manual reconciliation of top 100 vendor contracts pre-go-live</li>
+                        <li>Post-cutover automated daily reconciliation (90-day validation period)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Timeline -->
+        <section>
+            <h2>📅 Project Timeline</h2>
+            
+            <div class="image-placeholder">August 2014 - Present: 12-Month Delivery + 10+ Years Optimization</div>
+
+            <div class="timeline" style="margin-top: 2rem;">
+                <div class="timeline-item">
+                    <h4>August 2014: Kickoff</h4>
+                    <p>Project initiated. Team assembled: PM (you), IT Lead, Analyst, Sponsor (Director of Planning)</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Aug - Oct 2014: Requirements & Design Phase</h4>
+                    <p>Business process modeling, use cases, technical specifications. RFP issued for vendor selection.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Oct 2014: Vendor Selection</h4>
+                    <p>Negotiation completed. Contract awarded at USD 80K (80% below budget).</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Oct 2014 - Jun 2015: Development & Integration</h4>
+                    <p>Vendor develops core platform. You architect financial system integration, contract validation engine, BI layer design.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Jun - Aug 2015: Data Migration</h4>
+                    <p>Most challenging phase. Transform 10+ years legacy data. Parallel validation against old system.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Aug 2015: Testing & UAT</h4>
+                    <p>Functional, integration, performance, security testing. User acceptance validation with programming and finance teams.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>August 2015: Go-Live</h4>
+                    <p>Production deployment across all channels. Parallel run monitoring. Cutover to new system. Success! Zero downtime.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2015 - Present: Operations & Enhancement</h4>
+                    <p>10+ years of continuous optimization. QlikSense BI added post-deployment. Oracle on-prem migrated to Cloud. System remains strategic asset.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Achievements -->
+        <section>
+            <h2>🏆 Key Achievements</h2>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3>Delivery Excellence</h3>
+                    <div class="achievement">
+                        <div class="achievement-icon">💰</div>
+                        <div class="achievement-content">
+                            <h4>80% Under Budget</h4>
+                            <p>USD 80K actual vs USD 400K planned. Strategic vendor negotiation + efficient execution.</p>
+                        </div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-icon">⏱️</div>
+                        <div class="achievement-content">
+                            <h4>On-Time Delivery</h4>
+                            <p>12 months planned, 12 months delivered. Zero schedule slippage.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Business Impact</h3>
+                    <div class="achievement">
+                        <div class="achievement-icon">📈</div>
+                        <div class="achievement-content">
+                            <h4>50% Loss Reduction Achieved</h4>
+                            <p>MM$150+ annual recovery. Eliminated expired-content violations entirely.</p>
+                        </div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-icon">⚙️</div>
+                        <div class="achievement-content">
+                            <h4>10+ Years in Production</h4>
+                            <p>Still mission-critical. Zero unplanned downtime. Continuous enhancement capability.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lessons Learned -->
+        <section>
+            <h2>💡 Leadership Insights</h2>
+
+            <div class="achievement">
+                <div class="achievement-icon">🎯</div>
+                <div class="achievement-content">
+                    <h4>Strategic Vendor Management</h4>
+                    <p>Clear SLAs + competitive RFP process resulted in 80% cost savings without scope compromise. Relationship-based negotiation won trust and performance.</p>
+                </div>
+            </div>
+
+            <div class="achievement">
+                <div class="achievement-icon">🔧</div>
+                <div class="achievement-content">
+                    <h4>Architecture for Long-Term Value</h4>
+                    <p>Design decisions prioritized extensibility over feature velocity. The system's ability to accept enhancements for 10+ years validates this approach. Modular C++ architecture proved essential.</p>
+                </div>
+            </div>
+
+            <div class="achievement">
+                <div class="achievement-icon">👥</div>
+                <div class="achievement-content">
+                    <h4>Cross-Functional Alignment</h4>
+                    <p>Success required deep collaboration between programming, finance, IT, and procurement. Weekly steering committee ensured stakeholder buy-in and rapid decision-making.</p>
+                </div>
+            </div>
+
+            <div class="achievement">
+                <div class="achievement-icon">📊</div>
+                <div class="achievement-content">
+                    <h4>Data Integrity First</h4>
+                    <p>Investment in rigorous data migration validation (ETL + manual checks + reconciliation) paid dividends. Clean data enabled smooth go-live and long-term operational stability.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <section style="text-align: center; background: transparent; box-shadow: none; padding: 2rem 0;">
+            <p style="font-size: 0.95rem; color: #666;">
+                <strong>Project Duration:</strong> 2014 - Present<br>
+                <strong>Status:</strong> Production • Active • Ongoing Optimization<br>
+                <strong>Organization:</strong> Canal 13 S.A., Santiago, Chile
+            </p>
+            <p style="margin-top: 2rem; color: #999; font-size: 0.9rem;">
+                Interested in enterprise integration, project leadership, or scalable systems design?<br>
+                <strong>Get in touch:</strong> gonzalezcarrasco.diegosebastian@gmail.com | +61 431 139 167 | <a href="https://linkedin.com/in/diegosgonzalezc" style="color: #ff6600; text-decoration: none;">LinkedIn</a>
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2014-2026 Canal 13 SPPAM System | Diego González - Project Manager & Main Architect</p>
+    </footer>
+
+    <script>
+        // Tab Switching
+        function switchTab(event, tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Expandable Sections
+        function toggleExpand(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.expandable-icon');
+
+            content.classList.toggle('open');
+            icon.classList.toggle('open');
+        }
+
+        // Budget Chart
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        new Chart(budgetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Actual Spend', 'Budget Savings'],
+                datasets: [{
+                    data: [80, 320],
+                    backgroundColor: ['#ff6600', '#ffe0b2'],
+                    borderColor: ['#ff6600', '#ffd699'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Timeline Chart
+        const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+        new Chart(timelineCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Planned', 'Actual'],
+                datasets: [{
+                    label: 'Months',
+                    data: [12, 12],
+                    backgroundColor: ['#ff8c00', '#4caf50'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 15
+                    }
+                }
+            }
+        });
+
+        // Impact Chart
+        const impactCtx = document.getElementById('impactChart').getContext('2d');
+        new Chart(impactCtx, {
+            type: 'line',
+            data: {
+                labels: ['Pre-System', 'Post-System'],
+                datasets: [{
+                    label: 'Annual Loss (MM$)',
+                    data: [300, 150],
+                    borderColor: '#ff6600',
+                    backgroundColor: 'rgba(255, 102, 0, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'MM$' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

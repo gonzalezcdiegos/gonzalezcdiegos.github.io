@@ -262,6 +262,24 @@
             font-size: 12px;
         }
         
+        .case-study-link {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #0066cc;
+        }
+
+        .project-card:hover .case-study-link {
+            text-decoration: underline;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .case-study-link {
+                color: #5fa3ff;
+            }
+        }
+
         .tech-tag {
             background: #e8f0ff;
             color: #0066cc;
@@ -517,7 +535,28 @@
 
         <section id="portfolio">
             <h2>Portfolio & Case Studies</h2>
-            
+
+            <a href="canal13-sppam.html" class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">📡</div>
+                    <div>
+                        <div class="project-category">Interactive Case Study · Systems Architecture & PM</div>
+                        <div class="project-title">Canal 13 SPPAM: Programming Schedule & Content Contract Platform</div>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Project Manager and main architect of an integrated scheduling, content-contract and financial control system that stopped expired licensed content from going to air. Delivered in 12 months at <strong>USD 80K vs USD 400K budget (80% under)</strong>, cut annual losses from expired contracts by 50%, reduced manual reconciliation from 40 to 8 hours a month, and has been in production for 10+ years.
+                </p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Oracle Database</span>
+                    <span class="tech-tag">Oracle ERP</span>
+                    <span class="tech-tag">QlikSense</span>
+                    <span class="tech-tag">ETL & Data Migration</span>
+                    <span class="tech-tag">Vendor Management</span>
+                </div>
+                <span class="case-study-link">View interactive case study →</span>
+            </a>
+
             <a href="#" class="project-card">
                 <div class="project-header">
                     <div class="project-icon">☀️</div>
